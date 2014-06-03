@@ -1,0 +1,8 @@
+<?php if (!defined('APP')) { die('Access denied.'); }
+define('DB_HOST', 'localhost');
+define('DB_NAME', 'cs275_final');
+define('DB_USER', 'cs275_final');
+define('DB_PASS', '');
+
+define('BASE_PATH', 'D:\Windows\Programs\Bitnami\apache2\htdocs\cs275-final');
+define('BASE_URL', 'http://127.0.0.1/cs275-final/');

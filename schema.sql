@@ -1,18 +1,4 @@
-use `cs275_final`;
-
-
-create table `cs275_final`.`Patron` (
-  `patron_id`       int unsigned    not null auto_increment,
-  `name`            varchar(50)     not null,
-  -- max email len = 254 (http://stackoverflow.com/a/574698/700375)
-  `email`           varchar(254)    null default null,
-  `phone`           varchar(25)     null default null,
-
-    primary key (`patron_id`)
-);
-
-
-create table `cs275_final`.`Creation` (
+create table `Creation` (
   `creation_id`     int unsigned        not null auto_increment,
   `main_title`      varchar(4000)       not null,
   `release_year`    smallint unsigned   null default null,
@@ -22,7 +8,7 @@ create table `cs275_final`.`Creation` (
 );
 
 
-create table `cs275_final`.`CreationAttribute` (
+create table `CreationAttribute` (
   `creation_attribute_id`   int unsigned    not null auto_increment,
   `name`                    varchar(100)    not null,
   `help_text`               TEXT            null default null,
@@ -38,7 +24,7 @@ create table `cs275_final`.`CreationAttribute` (
 -- task beyond the scope of this project. Therefore, I am implementing a
 -- semi-structured entity-attribute-value data model which allows admins to
 -- define custom attributes as needed. This allows the
-create table `cs275_final`.`CreationAV` (
+create table `CreationAV` (
   `creation_attribute_id`   int unsigned    not null,
   `creation_id`             int unsigned    not null,
   `attribute_value`         varchar(1000)   not null,
@@ -56,7 +42,7 @@ create table `cs275_final`.`CreationAV` (
 -- artist, or record label, amongst other things.
 -- In an ideal implementation, there would be a means for adding semi-structured
 -- data to an Authority, such as a JSON-encoded field or an EAV model.
-create table `cs275_final`.`Authority` (
+create table `Authority` (
   `authority_id`    int unsigned                    not null auto_increment,
   `name`            varchar(4000)                   not null,
 
@@ -64,7 +50,7 @@ create table `cs275_final`.`Authority` (
 );
 
 
-create table `cs275_final`.`Role` (
+create table `Role` (
   `role_id`         int unsigned    not null auto_increment,
   `name`            varchar(30)     not null,
 
@@ -76,7 +62,7 @@ create table `cs275_final`.`Role` (
 -- authority's role in the work. This allows for situations where an authority
 -- takes on multiple roles, such as on the album "2001" by Dr. Dre, where Dre
 -- is both the main credited artist and executive producer.
-create table `cs275_final`.`CreationAuthority` (
+create table `CreationAuthority` (
   `creation_id`     int unsigned    not null,
   `authority_id`    int unsigned    not null,
   `role_id`         int unsigned    not null,
@@ -92,7 +78,7 @@ create table `cs275_final`.`CreationAuthority` (
 
 
 -- Creations may be classified by a standard list of subjects.
-create table `cs275_final`.`Subject` (
+create table `Subject` (
   `subject_id`      int unsigned    not null auto_increment,
   `name`            varchar(250)    not null,
 
@@ -101,7 +87,7 @@ create table `cs275_final`.`Subject` (
 
 
 -- Glue table for Creation and Subject, since multiple subjects may apply.
-create table `cs275_final`.`CreationSubject` (
+create table `CreationSubject` (
   `creation_id`     int unsigned    not null auto_increment,
   `subject`         int unsigned    not null,
 
@@ -115,7 +101,7 @@ create table `cs275_final`.`CreationSubject` (
 
 -- A resource is in a particular medium, such as CD, VHS, Book, Journal Article,
 -- and so on.
-create table `cs275_final`.`Medium` (
+create table `Medium` (
   `medium_id`       int unsigned    not null auto_increment,
   `name`            varchar(32)     not null,
 
@@ -123,7 +109,7 @@ create table `cs275_final`.`Medium` (
 );
 
 
-create table `cs275_final`.`Resource` (
+create table `Resource` (
   `resource_id`     int unsigned    not null auto_increment,
   `call_number`     varchar(32)     not null,
   `barcode`         varchar(100)    null default null,
@@ -138,7 +124,18 @@ create table `cs275_final`.`Resource` (
 );
 
 
-create table `cs275_final`.`Loan` (
+create table `Patron` (
+  `patron_id`       int unsigned    not null auto_increment,
+  `name`            varchar(50)     not null,
+  -- max email len = 254 (http://stackoverflow.com/a/574698/700375)
+  `email`           varchar(254)    null default null,
+  `phone`           varchar(25)     null default null,
+
+    primary key (`patron_id`)
+);
+
+
+create table `Loan` (
   `out_date`        datetime        not null,
   `patron_id`       int unsigned    not null,
   `resource_id`     int unsigned    not null,
@@ -154,7 +151,7 @@ create table `cs275_final`.`Loan` (
 
 
 -- This table is used to keep track of people who have permissions to do things.
-create table `cs275_final`.`Librarian` (
+create table `Librarian` (
   `librarian_id`    int unsigned    not null auto_increment,
   `username`        varchar(35)     not null,
   `password`        char(64)        not null,

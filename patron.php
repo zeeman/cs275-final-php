@@ -1,6 +1,6 @@
 <?php define('APP', 0);
-require('./common.php');
-require('./templates/base.php');
+require_once('./common.php');
+require_once('./templates/base.php');
 $patron_base_url = BASE_URL . "patron.php";
 
 $action = isset($_GET['action']) ? $_GET['action'] : 'list';

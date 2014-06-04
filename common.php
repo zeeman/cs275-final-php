@@ -1,8 +1,8 @@
-<?php if (!defined('APP')) { die('Access denied.'); }
+<?php defined('APP') or die("Access denied.");
 /* common.php
 Holds common code required by all files.
 */
-require('./config.php');
+require_once('./config.php');
 
 $db = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
 

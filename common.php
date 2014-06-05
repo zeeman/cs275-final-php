@@ -2,9 +2,10 @@
 /* common.php
 Holds common code required by all files.
 */
-require_once('./config.php');
+require_once('config.php');
 
-$db = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+// $db = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+$db = new PDO('mysql:host=' . DB_HOST . ';dbname=' . DB_NAME, DB_USER, DB_PASS);
 
 session_start();
 
@@ -22,4 +23,3 @@ function do_authentication()
         redirect_inside('login.php');
     }
 }
-?>

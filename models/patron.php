@@ -20,6 +20,14 @@ class Patron
         $this->db_connection = $db_connection;
     }
 
+    public function get_all()
+    {
+        $q = "select {$this->field_str} from {$this->table_name}";
+        $stmt = $db->prepare($q);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_OBJ);
+    }
+
     // retrieve patron by user ID. returns an anonymous object with an attribute for each field
     public function get($id)
     {

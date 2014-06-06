@@ -3,10 +3,11 @@
 Renders the patron detail form.
 
 args:
-$data - The data to display. If false, the fields will be empty.
+$patron_base_url - 
+$patron_obj - The data to display. If false, the fields will be empty.
 $error - An error message to display. If false, will not be displayed.
 */
-function patron_form($patron_base_url, $id, $name, $phone, $email, $error) {
+function patron_form($patron_base_url, $patron_obj, $error) {
 ?>
 <?php if ($id) { ?>
 <div>
@@ -28,24 +29,27 @@ function patron_form($patron_base_url, $id, $name, $phone, $email, $error) {
     <?php echo $error; ?>
 </div>
 <?php } ?>
-<input type="hidden" name="id" value="<?php echo $id; ?>">
-<?php if ($id) { ?>
+<input type="hidden" name="id" value="<?php echo $patron_obj->patron_id; ?>">
+<?php if ($patron_obj->id) { ?>
 <div class="form-group">
     <label for="patron_id">Patron ID</label>
-    <p id="patron_id"><?php echo $id; ?></p>
+    <p id="patron_id"><?php echo $patron_obj->id; ?></p>
 </div>
 <?php  }?>
 <div class="form-group">
     <label for="name">name</label>
-    <input type="text" class="form-control" id="name" name="name" value="<?php echo $name; ?>">
+    <input type="text" class="form-control" id="name" name="name"
+        value="<?php echo $patron_obj->name; ?>">
 </div>
 <div class="form-group">
     <label for="phone">phone</label>
-    <input type="text" class="form-control" id="phone" name="phone" value="<?php echo $phone; ?>">
+    <input type="text" class="form-control" id="phone" name="phone"
+        value="<?php echo $patron_obj->phone; ?>">
 </div>
 <div class="form-group">
     <label for="email">email</label>
-    <input type="text" class="form-control" id="email" name="email" value="<?php echo $email; ?>">
+    <input type="text" class="form-control" id="email" name="email"
+        value="<?php echo $patron_obj->email; ?>">
 </div>
 <input type="hidden" name="submit" value="submit">
 <button class="btn btn-default" type="submit">Submit</button>

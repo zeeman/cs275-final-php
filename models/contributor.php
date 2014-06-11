@@ -1,13 +1,9 @@
 <?php defined('APP') or die('Access denied.');
 
-class Patron
+class Contributor
 {
-    /*
-    Class allowing easy interaction with the Patron table. Follows Fowler's Table Data Gateway
-    pattern.
-    */
-    private $fields = ['patron_id', 'name', 'email', 'phone'];
-    private $table_name = "Patron";
+    private $fields = ['contributor_id', 'name'];
+    private $table_name = "Contributor";
     private $field_str;
     private $db_connection;
 
@@ -29,16 +25,14 @@ class Patron
         return $stmt->fetchAll(PDO::FETCH_OBJ);
     }
 
-    // retrieve patron by user ID. returns an anonymous object with an attribute for each field
     public function get($id)
     {
-        $q = "select {$this->field_str} from {$this->table_name} where `patron_id` = ?";
+        $q = "select {$this->field_str} from {$this->table_name} where `contributor_id` = ?";
         $stmt = $this->db->prepare($q);
         $stmt->execute([$id]);
         return $stmt->fetch(PDO::FETCH_OBJ);
     }
 
-    // find names like the name passed in. in the UI should mention that % and _ do things.
     public function find_name($name)
     {
         $q = "select {$this->field_str} from {$this->table_name} where `name` like ?";
@@ -47,34 +41,27 @@ class Patron
         return $stmt->fetchAll(PDO::FETCH_OBJ);
     }
 
-    /* insert()
-    Accepts $name, $email, $phone of a new Patron object to create, returns the newly-created
-    entity's primary key.
-    */
-    public function insert($name, $email, $phone) 
+    public function insert($name) 
     {
-        $q = "insert `{$this->table_name}` (`name`,`email`,`phone`) values(?,?,?)";
+        $q = "insert `{$this->table_name}` (`name`) values(?)";
         $stmt = $this->db->prepare($q);
-        $stmt->execute([$name, $email, $phone]);
+        $stmt->execute([$name]);
 
         $q = "select last_insert_id()";
         $stmt = $this->db->query($q);
         return $stmt->fetchColumn(0);
     }
 
-    /* update()
-    Updates $name, $email, and $phone of patron $id. Returns a bool indicating success or failure.
-    */
-    public function update($id, $name, $email, $phone)
+    public function update($id, $name)
     {
-        $q = "update `{$this->table_name}` set name=?, email=?, phone=? where `patron_id` = ?";
+        $q = "update `{$this->table_name}` set name=? where `contributor_id` = ?";
         $stmt = $this->db->prepare($q);
-        return $stmt->execute(array($name, $email, $phone, $id));
+        return $stmt->execute(array($name, $id));
     }
 
     public function delete($id)
     {
-        $q = "delete from `{$this->table_name}` where `patron_id` = ?";
+        $q = "delete from `{$this->table_name}` where `contributor_id` = ?";
         $stmt = $this->db->prepare($q);
         return $stmt->execute([$id]);
     }

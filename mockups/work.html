@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>
+        Library
+    </title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
+  </head>
+  <body>
+    <div class="navbar navbar-default navbar-static-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Library</a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="#">Check out</a></li>
+                    <li><a href="#">Check in</a></li>
+                    <li><a href="#">Loans</a></li>
+                    <li><a href="#">Patrons</a></li>
+                    <li><a href="#">Catalog</a></li>
+                    <li><a href="#">Authorities</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#">Admin</a></li>
+                    <li><a href="#">Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <h1>Edit Work</h1>
+        
+        <div class="spaced">
+            <ul class="nav nav-tabs">
+                <li><a href="#">List</a></li>
+                <li class="active"><a href="#">Edit</a></li>
+            </ul>
+        </div>
+
+        <form method="post">
+            <div class="form-group">
+                <label for="id">Work ID</label>
+                <p id="id" class="form-control-static">1</p>
+            </div>
+            <div class="form-group">
+                <label for="title">Title</label>
+                <input type="text" class="form-control" id="title" name="title" required>
+            </div>
+            <div class="form-group">
+                <label for="description">Description</label>
+                <textarea name="description" id="description" cols="30" rows="10"
+                    class="form-control"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="category">Category</label>
+                <select name="category" id="category" class="form-control">
+                    <!--
+                    <option value="<?= $category->id ?>"
+                        <?= $category->id == $work->category ? 'selected' : '' ?>>
+                        <?= $category->name ?>
+                    </option> -->
+                    <option value="1">Sci Fi</option>
+                    <option value="2">Anthropology</option>
+                </select>
+            </div>
+            <input type="hidden" name="submit" value="work">
+            <button class="btn btn-default" type="submit">Submit</button>
+        </form>
+
+        <h2>Contributors</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Role</th>
+                    <th colspan="2">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Contrib Utor</td>
+                    <td>Producer</td>
+                    <td><a href="#">Edit</a></td>
+                    <td><a href="#">Delete</a></td>
+                </tr>
+
+            </tbody>
+        </table>
+
+        <h3>Add a contributor:</h3>
+        <form method="post">
+            <div class="form-group">
+                <label for="contributor">Contributor</label>
+                <select name="contributor" id="contributor" class="form-control">
+                    <option value="1">Contrib Utor</option>
+                    <option value="2">Aut Hority</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="role">Role</label>
+                <select name="role" id="role" class="form-control">
+                    <option value="1">Producer</option>
+                    <option value="2">Author</option>
+                </select>
+            </div>
+
+            <input type="hidden" name="submit" value="contributor">
+            <button class="btn btn-default" type="submit">Submit</button>
+        </form>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+  </body>
+</html>

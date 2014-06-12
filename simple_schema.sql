@@ -49,8 +49,9 @@ create table `Item` (
     `medium` varchar(100),
     `location` varchar(250),
     `barcode` varchar(8000),
+    `work_id` int unsigned not null,
     primary key (`item_id`),
-
+    foreign key (`work_id`) references `Work` (`work_id`),
     index(`barcode`)
 );
 
